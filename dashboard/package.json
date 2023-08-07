@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dc:build": "docker build -t news_dashboard .",
+    "dc:up": "docker-compose --env-file ./.env.local up -d",
+    "dc:down": "docker-compose --env-file ./.env.local down"
   },
   "dependencies": {
     "@types/node": "20.4.8",
