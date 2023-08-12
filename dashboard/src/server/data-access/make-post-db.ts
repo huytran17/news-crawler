@@ -73,7 +73,13 @@ export default function makePostDb({
     }: {
       postDetails: IPost;
     }): Promise<IPost | null> {
-      return await new Promise((resolve) => resolve(null));
+      const inserted = await postDbModel.create(postDetails);
+
+      if (inserted) {
+        return new Post(inserted);
+      }
+
+      return null;
     }
   })();
 }
