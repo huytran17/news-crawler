@@ -5,6 +5,7 @@ export default class Post implements IPost {
   public readonly title: string;
   public readonly slug: string;
   public readonly description?: string;
+  public readonly content: string;
   public readonly thumbnail_url?: string;
   public readonly url: string;
   public readonly created_at: Date;
@@ -13,6 +14,7 @@ export default class Post implements IPost {
     title,
     slug,
     description,
+    content,
     thumbnail_url,
     url,
     created_at,
@@ -21,6 +23,7 @@ export default class Post implements IPost {
     title: string;
     slug: string;
     description?: string;
+    content: string;
     thumbnail_url?: string;
     url: string;
     created_at: Date;
@@ -29,6 +32,7 @@ export default class Post implements IPost {
     this.title = title;
     this.slug = slug;
     this.description = description;
+    this.content = content;
     this.thumbnail_url = thumbnail_url;
     this.url = url;
     this.created_at = created_at;
