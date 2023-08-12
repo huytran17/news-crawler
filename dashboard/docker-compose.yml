@@ -3,35 +3,37 @@ version: "1.0"
 services:
   mongo:
     image: mongo
+    container_name: mongo
     restart: always
     volumes:
-      - ./mongo/data:/data/db
+      - ./mongo-data:/mongo-data
     ports:
-      - ${ME_CONFIG_MONGODB_PORT:-27017}:27017
+      - ${MONGO_ROOT_PORT:-27017}:${MONGO_ROOT_PORT}
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${ME_CONFIG_MONGODB_ADMINUSERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${ME_CONFIG_MONGODB_ADMINPASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
     networks:
       - mongodb-network
     healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongo db:${ME_CONFIG_MONGODB_PORT}/speech-api --quiet
+      test: echo 'db.runCommand("ping").ok' | mongo db:${MONGO_ROOT_PORT}/speech-api --quiet
       interval: 30s
       timeout: 15s
       retries: 5
 
   mongo-express:
     image: mongo-express
+    container_name: mongo-express
     restart: always
     volumes:
-      - ./mongo/data:/data/db
+      - ./mongo-data:/mongo-data
     ports:
       - 8081:8081
     depends_on:
       - mongo
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${ME_CONFIG_MONGODB_ADMINUSERNAME}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${ME_CONFIG_MONGODB_ADMINPASSWORD}
-      ME_CONFIG_MONGODB_URL: ${ME_CONFIG_MONGODB_URL}
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_ROOT_USERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_ROOT_PASSWORD}
+      ME_CONFIG_MONGODB_SERVER: ${MONGO_ROOT_SERVER}
     networks:
       - mongodb-network
 
