@@ -1,0 +1,54 @@
+import mongoose from "mongoose";
+import { map } from "lodash";
+import IPageDb from "./interfaces/page";
+import IPage, { SiteType } from "../database/interfaces/page";
+import Page from "../database/entities/page";
+
+export default function makePageDb({
+  pageDbModel,
+}: {
+  pageDbModel: mongoose.Model<
+    IPage & mongoose.Document,
+    Record<string, unknown>
+  >;
+}): IPageDb {
+  return new (class PageDb implements IPageDb {
+    async findAllBySite({ site }: { site: SiteType }): Promise<IPage[] | null> {
+      const query_conditions = {
+        site,
+      };
+
+      const existing = await pageDbModel
+        .find(query_conditions)
+        .select("_id url");
+
+      if (existing) {
+        return map(existing, (page) => new Page(page));
+      }
+
+      return null;
+    }
+
+    async upsert({
+      pageDetails,
+    }: {
+      pageDetails: IPage;
+    }): Promise<IPage | null> {
+      const query_conditions = {
+        url: pageDetails.url,
+      };
+
+      const created = await pageDbModel.findOneAndUpdate(
+        query_conditions,
+        pageDetails,
+        { upsert: true }
+      );
+
+      if (created) {
+        return new Page(created);
+      }
+
+      return null;
+    }
+  })();
+}
