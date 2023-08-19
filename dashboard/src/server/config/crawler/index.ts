@@ -34,8 +34,8 @@ export default class NewsCrawler {
         done: Function
       ) => {
         if (error) {
-          console.error(error);
-          return done();
+          done();
+          return console.error(error);
         }
 
         done();
