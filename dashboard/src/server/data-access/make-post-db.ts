@@ -12,7 +12,7 @@ export default function makePostDb({
     IPost & mongoose.Document,
     Record<string, unknown>
   >;
-}) {
+}): IPostDb {
   return new (class PostDb implements IPostDb {
     async findAllPaginated({
       page,

@@ -38,14 +38,18 @@ export default function makePageDb({
         url: pageDetails.url,
       };
 
-      const created = await pageDbModel.findOneAndUpdate(
+      const existing = await pageDbModel.findOneAndUpdate(
         query_conditions,
         pageDetails,
-        { upsert: true }
+        {
+          upsert: true,
+          new: true,
+          setDefaultOnInsert: true,
+        }
       );
 
-      if (created) {
-        return new Page(created);
+      if (existing) {
+        return new Page(existing);
       }
 
       return null;
