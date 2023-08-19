@@ -16,6 +16,7 @@
     "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.14",
+    "crawler": "^1.4.0",
     "lodash": "^4.17.21",
     "mongoose": "^7.4.3",
     "mongoose-lean-virtuals": "^0.9.1",
@@ -27,6 +28,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "@types/crawler": "^1.2.2",
     "@types/lodash": "^4.14.197"
   }
 }
