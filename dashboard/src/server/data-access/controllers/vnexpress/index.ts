@@ -1,8 +1,8 @@
-import { crawler } from "@/server/config/crawler";
+import { upsertPage } from "@/server/use-cases/page";
 
 import makeCrawlNews from "./crawl-news";
 
-const crawlNews = makeCrawlNews({ crawler });
+const crawlNews = makeCrawlNews({ upsertPage });
 
 export default Object.freeze({
   crawlNews,
