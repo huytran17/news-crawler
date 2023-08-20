@@ -13,8 +13,8 @@ export default function CrawlList({
     const site_data = crawl_data[site];
 
     const template = (
-      <table className="table-fixed w-full" key={site}>
-        <thead>
+      <table className="w-full" key={site}>
+        <thead className="h-12 bg-sky-200">
           <tr>
             <th>{site}</th>
             <th>Total</th>
@@ -22,6 +22,7 @@ export default function CrawlList({
           </tr>
         </thead>
         <tbody>
+          <tr className="separator"></tr>
           {map(site_data.pages, (page) => {
             const sub_categories = page.sub_categories;
 
@@ -43,5 +44,5 @@ export default function CrawlList({
     list.push(template);
   }
 
-  return <>{list}</>;
+  return <div className="p-4 relative overflow-x-auto">{list}</div>;
 }
