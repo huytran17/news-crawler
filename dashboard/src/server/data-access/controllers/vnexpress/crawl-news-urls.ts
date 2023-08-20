@@ -10,9 +10,11 @@ export default function makeCrawlNewsURLs({
 }) {
   return async function crawlNewsURLs({
     url,
+    category,
     total_page,
   }: {
     url: string;
+    category: string;
     total_page: number;
   }) {
     const headers = {
@@ -50,6 +52,7 @@ export default function makeCrawlNewsURLs({
 
             const pageDetails = {
               url,
+              category,
               site: SiteType.VNEXPRESS,
             };
 

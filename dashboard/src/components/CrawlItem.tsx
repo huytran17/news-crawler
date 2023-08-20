@@ -1,3 +1,4 @@
+import { HttpMethod } from "@/config/enums/http-method";
 import { useState } from "react";
 
 export default function CrawItem({
@@ -14,11 +15,12 @@ export default function CrawItem({
   const fetchURLs = async () => {
     const data = {
       url: `${domain}/${category}`,
+      category,
       total_page,
     };
 
     await fetch(`/api/vnexpress/fetch`, {
-      method: "POST",
+      method: HttpMethod.POST,
       mode: "cors",
       cache: "no-cache",
       credentials: "same-origin",

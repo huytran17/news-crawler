@@ -1,13 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { crawlNewsURLs } from "@/server/data-access/controllers/vnexpress";
 import makeDb from "@/server/data-access/make-db";
+import { HttpStatus } from "@/config/enums";
+import { HttpMethod } from "@/config/enums/http-method";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== "POST") {
-    res.status(405).json({ name: "unsupported method" });
+  if (req.method !== HttpMethod.POST) {
+    res.status(HttpStatus.UNSUPPORTED_METHOD).json({ success: false });
   }
 
   try {
@@ -15,9 +17,8 @@ export default async function handler(
 
     await crawlNewsURLs({ ...req.body });
 
-    res.status(200).json({ name: "jkl" });
+    res.status(HttpStatus.OK).json({ success: true });
   } catch (error) {
-    console.error(error);
-    res.status(500).json(error);
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(error);
   }
 }
