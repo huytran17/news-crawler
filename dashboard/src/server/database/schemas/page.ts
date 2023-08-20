@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import mongoose_lean_virtuals from "mongoose-lean-virtuals";
+import { SiteType } from "@/config/enums";
 
 const Schema = mongoose.Schema;
 

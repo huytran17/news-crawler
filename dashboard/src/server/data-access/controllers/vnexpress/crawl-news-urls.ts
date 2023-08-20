@@ -1,13 +1,14 @@
 import Crawler from "crawler";
 import { map } from "lodash";
 import { UpsertPage } from "@/server/use-cases/page/upsert-page";
+import { SiteType, HttpStatus } from "@/config/enums";
 
-export default function makeCrawlNews({
+export default function makeCrawlNewsURLs({
   upsertPage,
 }: {
   upsertPage: UpsertPage;
 }) {
-  return function crawlNews({
+  return async function crawlNewsURLs({
     url,
     total_page,
   }: {

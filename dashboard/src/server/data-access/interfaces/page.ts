@@ -1,3 +1,5 @@
+import { SiteType } from "@/config/enums";
+
 export default interface IPageDb {
   findAllBySite: ({ site }: { site: SiteType }) => Promise<IPage[] | null>;
   upsert: ({

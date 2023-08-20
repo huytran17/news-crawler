@@ -1,13 +1,28 @@
+import { SiteType, Domain, Category } from "../enums";
+
 const crawl_data = {
   [SiteType.VNEXPRESS]: {
-    domain: domain.VNEXPRESS,
+    domain: Domain.VNEXPRESS,
     pages: [
       {
-        category: category.SUC_KHOE,
+        category: Category.SUC_KHOE,
         sub_categories: [
-          category.TIN_TUC,
-          category.TU_VAN,
-          category.DINH_DUONG,
+          Category.TIN_TUC,
+          Category.TU_VAN,
+          Category.DINH_DUONG,
+        ],
+      },
+    ],
+  },
+  [SiteType.DANTRI]: {
+    domain: Domain.DANTRI,
+    pages: [
+      {
+        category: Category.SUC_KHOE,
+        sub_categories: [
+          Category.TIN_TUC,
+          Category.TU_VAN,
+          Category.DINH_DUONG,
         ],
       },
     ],

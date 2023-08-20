@@ -10,4 +10,10 @@ type Data = {
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
-) {}
+) {
+  if (req.method !== "POST") {
+    res.status(405).json({ name: "unsupported method" });
+  }
+
+  res.status(200).json({ name: "jkl" });
+}

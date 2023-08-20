@@ -1,11 +1,11 @@
 import { upsertPage } from "@/server/use-cases/page";
 
-import makeCrawlNews from "./crawl-news";
+import makeCrawlNewsURLs from "./crawl-news-urls";
 
-const crawlNews = makeCrawlNews({ upsertPage });
+const crawlNewsURLs = makeCrawlNewsURLs({ upsertPage });
 
 export default Object.freeze({
-  crawlNews,
+  crawlNewsURLs,
 });
 
-export { crawlNews };
+export { crawlNewsURLs };
