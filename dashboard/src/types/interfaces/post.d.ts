@@ -10,4 +10,15 @@ declare global {
     category: string;
     created_at: Date;
   }
+
+  interface IPostPaginated {
+    pagination: {
+      from: number | null;
+      to: number | null;
+      page: number;
+      entries_per_page: number;
+      total: number;
+    };
+    data: IPost[];
+  }
 }
