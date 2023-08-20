@@ -1,7 +1,7 @@
+import { HttpStatus, SiteType } from "@/config/enums";
+import { UpsertPage } from "@/server/use-cases/page/upsert-page";
 import Crawler from "crawler";
 import { map } from "lodash";
-import { UpsertPage } from "@/server/use-cases/page/upsert-page";
-import { SiteType, HttpStatus } from "@/config/enums";
 
 export default function makeCrawlNewsURLs({
   upsertPage,
@@ -17,10 +17,6 @@ export default function makeCrawlNewsURLs({
     category: string;
     total_page: number;
   }) {
-    const headers = {
-      "Content-Type": "application/json",
-    };
-
     const options = {
       maxConnections: 10,
     };
@@ -49,10 +45,18 @@ export default function makeCrawlNewsURLs({
 
           const upsert_page_promises = map(list_news, async (news_item) => {
             const url = $(news_item).find(".title-news a").attr("href") || "";
+            const thumbnail_url =
+              $(news_item).find(".thumb-art img").attr("src") || "";
+            const title = $(news_item).find(".title-news a").text() || "";
+            const description =
+              $(news_item).find(".description a").html() || "";
 
             const pageDetails = {
               url,
               category,
+              title,
+              description,
+              thumbnail_url,
               site: SiteType.VNEXPRESS,
             };
 
@@ -68,7 +72,6 @@ export default function makeCrawlNewsURLs({
       crawler.queue([...urls]);
 
       return {
-        headers,
         status: HttpStatus.OK,
         body: {
           success: true,
@@ -76,7 +79,6 @@ export default function makeCrawlNewsURLs({
       };
     } catch (error: any) {
       throw {
-        headers,
         status: HttpStatus.INTERNAL_SERVER_ERROR,
         body: {
           data: error.message,

@@ -1,17 +1,17 @@
 import { postDb } from "@/server/data-access";
 
-import makeCreatePost from "./create-post";
+import makeUpsertPost from "./upsert-post";
 import makeGetPostsPaginated from "./get-posts-paginated";
 
-const createPost = makeCreatePost({ postDb });
+const upsertPost = makeUpsertPost({ postDb });
 
 const getPostsPaginated = makeGetPostsPaginated({ postDb });
 
 const postServices = Object.freeze({
-  createPost,
+  upsertPost,
   getPostsPaginated,
 });
 
 export default postServices;
 
-export { createPost, getPostsPaginated };
+export { upsertPost, getPostsPaginated };

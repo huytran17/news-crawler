@@ -1,5 +1,6 @@
-import CrawItem from "./CrawlItem";
+import { SiteType } from "@/config/enums";
 import { map } from "lodash";
+import CrawItem from "./CrawlItem";
 
 export default function CrawlList({
   crawl_data,
@@ -30,6 +31,7 @@ export default function CrawlList({
                   total={1}
                   category={`${page.category}/${sub_category}`}
                   domain={site_data.domain}
+                  site={site as SiteType}
                 />
               </tr>
             ));

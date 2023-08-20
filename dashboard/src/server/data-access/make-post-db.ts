@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
 import { merge } from "lodash";
+import mongoose from "mongoose";
 
 import Post from "../database/entities/post";
 import IPostDb, { IPostPaginated } from "./interfaces/post";
@@ -67,12 +67,24 @@ export default function makePostDb({
       return null;
     }
 
-    async insert({
+    async upsert({
       postDetails,
     }: {
-      postDetails: IPost;
+      postDetails: Omit<IPost, "_id" | "created_at">;
     }): Promise<IPost | null> {
-      const inserted = await postDbModel.create(postDetails);
+      const query_conditions = {
+        title: postDetails.title,
+      };
+
+      const inserted = await postDbModel.findOneAndUpdate(
+        query_conditions,
+        postDetails,
+        {
+          upsert: true,
+          new: true,
+          setDefaultOnInsert: true,
+        }
+      );
 
       if (inserted) {
         return new Post(inserted);

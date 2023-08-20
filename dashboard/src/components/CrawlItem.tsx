@@ -1,35 +1,52 @@
-import { HttpMethod } from "@/config/enums/http-method";
+import { HttpMethod, SiteType } from "@/config/enums";
 import { useState } from "react";
 
 export default function CrawItem({
   category,
   total,
   domain,
+  site,
 }: {
   category: string;
   total: number;
   domain: string;
+  site: SiteType;
 }) {
   const [total_page, setTotalPage] = useState(total);
 
-  const fetchURLs = async () => {
-    const data = {
+  const api_configs: RequestInit = {
+    method: HttpMethod.POST,
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+  };
+
+  const fetchData = async () => {
+    const payload = {
       url: `${domain}/${category}`,
       category,
       total_page,
     };
 
-    await fetch(`/api/vnexpress/fetch`, {
-      method: HttpMethod.POST,
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      redirect: "follow",
-      referrerPolicy: "no-referrer",
-      body: JSON.stringify(data),
+    await fetch("/api/vnexpress/fetch", {
+      ...api_configs,
+      body: JSON.stringify(payload),
+    });
+  };
+
+  const crawl = async () => {
+    const payload = {
+      site,
+    };
+
+    await fetch("/api/vnexpress/crawl", {
+      ...api_configs,
+      body: JSON.stringify(payload),
     });
   };
 
@@ -48,11 +65,14 @@ export default function CrawItem({
       <td className="flex justify-center gap-4">
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-          onClick={fetchURLs}
+          onClick={fetchData}
         >
           Fetch
         </button>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+          onClick={crawl}
+        >
           Crawl
         </button>
       </td>

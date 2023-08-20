@@ -7,6 +7,9 @@ const Schema = mongoose.Schema;
 const page_schema = new Schema({
   url: { type: String, required: true, trim: true },
   category: { type: String, required: true, trim: true },
+  title: { type: String, required: true, trim: true },
+  description: { type: String, required: true, trim: true },
+  thumbnail_url: { type: String, required: true, trim: true },
   site: {
     type: String,
     required: true,

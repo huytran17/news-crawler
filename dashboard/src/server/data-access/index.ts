@@ -1,7 +1,7 @@
-import makePostDb from "./make-post-db";
 import makePageDb from "./make-page-db";
+import makePostDb from "./make-post-db";
 
-import { PostModel, PageModel } from "../database/models";
+import { PageModel, PostModel } from "../database/models";
 
 const postDb = makePostDb({ postDbModel: PostModel });
 const pageDb = makePageDb({ pageDbModel: PageModel });

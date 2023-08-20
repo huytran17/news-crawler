@@ -9,7 +9,11 @@ export default interface IPostDb {
     query: string;
   }) => Promise<IPostPaginated | null>;
 
-  insert: ({ postDetails }: { postDetails: IPost }) => Promise<IPost | null>;
+  upsert: ({
+    postDetails,
+  }: {
+    postDetails: Omit<IPost, "_id" | "created_at">;
+  }) => Promise<IPost | null>;
 }
 
 export interface IPostPaginated {

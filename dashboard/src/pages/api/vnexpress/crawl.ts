@@ -1,7 +1,7 @@
 import { HttpMethod, HttpStatus } from "@/config/enums";
-import { crawlNewsURLs } from "@/server/data-access/controllers/vnexpress";
+import { crawlNews } from "@/server/data-access/controllers/vnexpress";
 import makeDb from "@/server/data-access/make-db";
-import type { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,7 +14,7 @@ export default async function handler(
   try {
     await makeDb();
 
-    const data = await crawlNewsURLs({ ...req.body });
+    const data = await crawlNews({ ...req.body });
 
     res.status(HttpStatus.OK).json(data);
   } catch (error) {
