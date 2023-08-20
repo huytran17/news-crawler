@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
-import { map } from "lodash";
-import IPageDb from "./interfaces/page";
-import Page from "../database/entities/page";
 import { SiteType } from "@/config/enums";
+import { map } from "lodash";
+import mongoose from "mongoose";
+import Page from "../database/entities/page";
+import IPageDb from "./interfaces/page";
 
 export default function makePageDb({
   pageDbModel,
