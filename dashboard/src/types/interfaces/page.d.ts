@@ -7,8 +7,4 @@ declare global {
     site: SiteType;
     created_at: Date;
   }
-
-  enum SiteType {
-    VNEXPRESS = "vnexpress",
-  }
 }
