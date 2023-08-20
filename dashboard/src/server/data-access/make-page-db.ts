@@ -2,7 +2,7 @@ import { SiteType } from "@/config/enums";
 import { map, merge } from "lodash";
 import mongoose from "mongoose";
 import Page from "../database/entities/page";
-import IPageDb, { IPagePaginated } from "./interfaces/page";
+import IPageDb from "./interfaces/page";
 
 export default function makePageDb({
   pageDbModel,

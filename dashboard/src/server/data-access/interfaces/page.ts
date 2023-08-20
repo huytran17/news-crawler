@@ -17,14 +17,3 @@ export default interface IPageDb {
     pageDetails: Omit<IPage, "_id" | "created_at">;
   }) => Promise<IPage | null>;
 }
-
-export interface IPagePaginated {
-  pagination: {
-    from: number | null;
-    to: number | null;
-    page: number;
-    entries_per_page: number;
-    total: number;
-  };
-  data: IPage[];
-}

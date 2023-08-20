@@ -2,7 +2,7 @@ import { merge } from "lodash";
 import mongoose from "mongoose";
 
 import Post from "../database/entities/post";
-import IPostDb, { IPostPaginated } from "./interfaces/post";
+import IPostDb from "./interfaces/post";
 
 export default function makePostDb({
   postDbModel,

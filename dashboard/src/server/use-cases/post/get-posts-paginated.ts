@@ -1,4 +1,4 @@
-import IPostDb, { IPostPaginated } from "@/server/data-access/interfaces/post";
+import IPostDb from "@/server/data-access/interfaces/post";
 
 export type GetPostsPaginated = ({
   page,

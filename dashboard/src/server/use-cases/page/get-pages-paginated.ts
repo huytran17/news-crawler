@@ -1,4 +1,4 @@
-import IPageDb, { IPagePaginated } from "@/server/data-access/interfaces/page";
+import IPageDb from "@/server/data-access/interfaces/page";
 
 export type GetPagesPaginated = ({
   page,

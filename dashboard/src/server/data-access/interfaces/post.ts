@@ -15,14 +15,3 @@ export default interface IPostDb {
     postDetails: Omit<IPost, "_id" | "created_at">;
   }) => Promise<IPost | null>;
 }
-
-export interface IPostPaginated {
-  pagination: {
-    from: number | null;
-    to: number | null;
-    page: number;
-    entries_per_page: number;
-    total: number;
-  };
-  data: IPost[];
-}
