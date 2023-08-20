@@ -1,5 +1,4 @@
 import IPageDb from "@/server/data-access/interfaces/page";
-import IPage, { SiteType } from "@/server/database/interfaces/page";
 
 export type GetAllBySite = ({
   site,

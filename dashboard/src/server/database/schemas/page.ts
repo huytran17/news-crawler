@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 import mongoose_lean_virtuals from "mongoose-lean-virtuals";
 
-import { SiteType } from "../interfaces/page";
-
 const Schema = mongoose.Schema;
 
 const page_schema = new Schema({

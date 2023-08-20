@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import { merge } from "lodash";
 
-import IPost from "../database/interfaces/post";
 import Post from "../database/entities/post";
 import IPostDb, { IPostPaginated } from "./interfaces/post";
 

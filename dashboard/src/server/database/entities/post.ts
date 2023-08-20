@@ -1,5 +1,3 @@
-import IPost from "../interfaces/post";
-
 export default class Post implements IPost {
   public readonly _id: string;
   public readonly title: string;

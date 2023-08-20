@@ -1,5 +1,3 @@
-import IPost from "@/server/database/interfaces/post";
-
 export default interface IPostDb {
   findAllPaginated: ({
     page,

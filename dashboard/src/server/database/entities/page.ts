@@ -1,5 +1,3 @@
-import IPage, { SiteType } from "../interfaces/page";
-
 export default class Page implements IPage {
   public readonly _id: string;
   public readonly url: string;

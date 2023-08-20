@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 import mongoose_lean_virtuals from "mongoose-lean-virtuals";
 
-import IPost from "../interfaces/post";
-
 const Schema = mongoose.Schema;
 
 const post_schema = new Schema<IPost>({

@@ -3,9 +3,6 @@ import mongoose from "mongoose";
 import post_schema from "../schemas/post";
 import page_schema from "../schemas/page";
 
-import IPost from "../interfaces/post";
-import IPage from "../interfaces/page";
-
 type IPostModel = IPost & mongoose.Document;
 type IPageModel = IPage & mongoose.Document;
 

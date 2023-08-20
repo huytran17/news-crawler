@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import { map } from "lodash";
 import IPageDb from "./interfaces/page";
-import IPage, { SiteType } from "../database/interfaces/page";
 import Page from "../database/entities/page";
 
 export default function makePageDb({
@@ -32,7 +31,7 @@ export default function makePageDb({
     async upsert({
       pageDetails,
     }: {
-      pageDetails: IPage;
+      pageDetails: Omit<IPage, "_id" | "created_at">;
     }): Promise<IPage | null> {
       const query_conditions = {
         url: pageDetails.url,

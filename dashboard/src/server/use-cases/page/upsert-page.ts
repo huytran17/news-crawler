@@ -4,7 +4,7 @@ import IPage from "@/server/database/interfaces/page";
 export type UpsertPage = ({
   pageDetails,
 }: {
-  pageDetails: IPage;
+  pageDetails: Omit<IPage, "_id" | "created_at">;
 }) => Promise<IPage | null>;
 
 export default function makeUpsertPage({
@@ -15,7 +15,7 @@ export default function makeUpsertPage({
   return async function upsertPage({
     pageDetails,
   }: {
-    pageDetails: IPage;
+    pageDetails: Omit<IPage, "_id" | "created_at">;
   }): Promise<IPage | null> {
     const upserted = await pageDb.upsert({ pageDetails });
     return upserted;
