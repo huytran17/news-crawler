@@ -1,4 +1,5 @@
-import { HttpMethod, SiteType } from "@/config/enums";
+import { api_config } from "@/config/common/api-config";
+import { SiteType } from "@/config/enums";
 import { useState } from "react";
 
 export default function CrawItem({
@@ -14,18 +15,6 @@ export default function CrawItem({
 }) {
   const [total_page, setTotalPage] = useState(total);
 
-  const api_configs: RequestInit = {
-    method: HttpMethod.POST,
-    mode: "cors",
-    cache: "no-cache",
-    credentials: "same-origin",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    redirect: "follow",
-    referrerPolicy: "no-referrer",
-  };
-
   const fetchData = async () => {
     const payload = {
       url: `${domain}/${category}`,
@@ -34,7 +23,7 @@ export default function CrawItem({
     };
 
     await fetch("/api/vnexpress/fetch", {
-      ...api_configs,
+      ...api_config,
       body: JSON.stringify(payload),
     });
   };
@@ -45,7 +34,7 @@ export default function CrawItem({
     };
 
     await fetch("/api/vnexpress/crawl", {
-      ...api_configs,
+      ...api_config,
       body: JSON.stringify(payload),
     });
   };

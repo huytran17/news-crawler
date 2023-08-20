@@ -61,7 +61,9 @@ export default function makeCrawlNews({
       return {
         status: HttpStatus.OK,
         body: {
-          success: true,
+          data: {
+            success: true,
+          },
         },
       };
     } catch (error: any) {

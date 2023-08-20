@@ -78,7 +78,9 @@ export default function makeCrawlNewsURLs({
       return {
         status: HttpStatus.OK,
         body: {
-          success: true,
+          data: {
+            success: true,
+          },
         },
       };
     } catch (error: any) {

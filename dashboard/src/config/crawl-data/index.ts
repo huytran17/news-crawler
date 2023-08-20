@@ -10,6 +10,7 @@ const crawl_data = {
           Category.TIN_TUC,
           Category.TU_VAN,
           Category.DINH_DUONG,
+          Category.KHOE_DEP,
         ],
       },
     ],

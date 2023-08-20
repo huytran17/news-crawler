@@ -3,4 +3,5 @@ export enum Category {
   TIN_TUC = "tin-tuc",
   TU_VAN = "tu-van",
   DINH_DUONG = "dinh-duong",
+  KHOE_DEP = "khoe-dep",
 }
