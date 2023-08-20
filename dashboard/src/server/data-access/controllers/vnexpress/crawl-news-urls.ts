@@ -37,7 +37,7 @@ export default function makeCrawlNewsURLs({
         ) => {
           if (err) {
             console.error(err);
-            done();
+            return done();
           }
 
           const $ = res.$;
@@ -45,6 +45,10 @@ export default function makeCrawlNewsURLs({
 
           const upsert_page_promises = map(list_news, async (news_item) => {
             const url = $(news_item).find(".title-news a").attr("href") || "";
+            if (url === "") {
+              return done();
+            }
+
             const thumbnail_url =
               $(news_item).find(".thumb-art img").attr("src") || "";
             const title = $(news_item).find(".title-news a").text() || "";

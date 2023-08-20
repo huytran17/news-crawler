@@ -73,7 +73,7 @@ export default function makePostDb({
       postDetails: Omit<IPost, "_id" | "created_at">;
     }): Promise<IPost | null> {
       const query_conditions = {
-        title: postDetails.title,
+        url: postDetails.url,
       };
 
       const inserted = await postDbModel.findOneAndUpdate(

@@ -4,7 +4,7 @@ import { SiteType } from "@/config/enums";
 
 const Schema = mongoose.Schema;
 
-const page_schema = new Schema({
+const page_schema = new Schema<IPage>({
   url: { type: String, required: true, trim: true },
   category: { type: String, required: true, trim: true },
   title: { type: String, required: true, trim: true },

@@ -29,7 +29,7 @@ export default function makeCrawlNews({
         ) => {
           if (err) {
             console.error(err);
-            done();
+            return done();
           }
 
           const $ = res.$;
@@ -43,6 +43,7 @@ export default function makeCrawlNews({
           $(content).find(".box-tinlienquanv2").remove();
 
           const postDetails = {
+            url: res.request.uri.href,
             title,
             category: trim(category, "/"),
             description,
