@@ -1,6 +1,13 @@
 import NewsList from "@/components/news/NewsList";
 import { GetServerSideProps } from "next";
 import { api_config } from "@/config/common/api-config";
+import { HttpMethod } from "@/config/enums";
+
+interface IPayload extends Record<string, string | string[] | undefined> {
+  page: string | string[] | undefined;
+  entries_per_page: string;
+  query: string | string[] | undefined;
+}
 
 export const getServerSideProps: GetServerSideProps<{
   pages: IPage[];
@@ -8,15 +15,29 @@ export const getServerSideProps: GetServerSideProps<{
   const page = context.query.page;
   const query = context.query.search;
 
-  const payload = {
-    page: page ?? 1,
-    entries_per_page: 15,
+  const payload: IPayload = {
+    page,
+    entries_per_page: "15",
     query,
   };
 
-  const response = await fetch("/api/page/get-pages-paginated", {
+  const url_query = new URLSearchParams();
+
+  for (const key in payload) {
+    if (!payload[key]) {
+      continue;
+    }
+
+    url_query.set(key, (payload[key] as string).toString());
+  }
+
+  const url = `${
+    process.env.BASE_URL
+  }/api/page/get-pages-paginated?${url_query.toString()}`;
+
+  const response = await fetch(url, {
     ...api_config,
-    body: JSON.stringify(payload),
+    method: HttpMethod.GET,
   });
 
   const data: IPagePaginated = await response.json();

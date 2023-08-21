@@ -13,7 +13,7 @@ export default async function handler(
     }
 
     await makeDb();
-
+    const c = req.query;
     await getPagesPaginated({ ...req.body });
   } catch (error) {
     res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(error);
