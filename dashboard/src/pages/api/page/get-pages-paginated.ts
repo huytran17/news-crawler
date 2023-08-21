@@ -13,8 +13,15 @@ export default async function handler(
     }
 
     await makeDb();
-    const c = req.query;
-    await getPagesPaginated({ ...req.body });
+    const query = req.query;
+
+    const payload = {
+      page: Number(query.page),
+      entries_per_page: Number(query.entries_per_page),
+      query: query.query as string,
+    };
+
+    await getPagesPaginated({ ...payload });
   } catch (error) {
     res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(error);
   }

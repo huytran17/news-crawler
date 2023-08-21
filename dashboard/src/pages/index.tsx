@@ -3,10 +3,10 @@ import { GetServerSideProps } from "next";
 import { api_config } from "@/config/common/api-config";
 import { HttpMethod } from "@/config/enums";
 
-interface IPayload extends Record<string, string | string[] | undefined> {
-  page: string | string[] | undefined;
-  entries_per_page: string;
-  query: string | string[] | undefined;
+interface IPayload<T> extends Record<string, T> {
+  page: T;
+  entries_per_page: T;
+  query: T;
 }
 
 export const getServerSideProps: GetServerSideProps<{
@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps<{
   const page = context.query.page;
   const query = context.query.search;
 
-  const payload: IPayload = {
+  const payload: IPayload<string | string[] | undefined> = {
     page,
     entries_per_page: "15",
     query,
