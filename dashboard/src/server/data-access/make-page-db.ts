@@ -50,7 +50,7 @@ export default function makePageDb({
         const is_over = totalTaking > total;
         const to = has_more ? (is_over ? total : totalTaking) : null;
 
-        const data = existing.map((page) => new Page(page));
+        const data = map(existing, (page) => new Page(page));
 
         return {
           pagination: {

@@ -1,5 +1,6 @@
 import { HttpStatus } from "@/config/enums";
 import { GetPostsPaginated } from "@/server/use-cases/post/get-posts-paginated";
+import makeDb from "../../make-db";
 
 export default function makeGetPostsPaginated({
   findPostsPaginated,
@@ -16,6 +17,8 @@ export default function makeGetPostsPaginated({
     query: string;
   }) {
     try {
+      await makeDb();
+
       const posts = await findPostsPaginated({ page, entries_per_page, query });
 
       return {

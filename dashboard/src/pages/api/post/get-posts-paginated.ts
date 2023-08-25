@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getPostsPaginated } from "@/server/data-access/controllers/post";
 import { HttpStatus } from "@/config/enums";
-import makeDb from "@/server/data-access/make-db";
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,9 +11,9 @@ export default async function handler(
       res.status(HttpStatus.UNSUPPORTED_METHOD).json({ success: false });
     }
 
-    await makeDb();
+    const data = await getPostsPaginated({ ...req.body });
 
-    await getPostsPaginated({ ...req.body });
+    res.status(HttpStatus.OK).json(data.body.data);
   } catch (error) {
     res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(error);
   }

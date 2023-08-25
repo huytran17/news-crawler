@@ -30,3 +30,14 @@ table {
 table tbody .separator {
   height: 10px;
 }
+
+.thumbnail img {
+  width: 240px;
+  max-width: unset;
+}
+
+@media (max-width: 640px) {
+  .thumbnail img {
+    width: 100%;
+  }
+}

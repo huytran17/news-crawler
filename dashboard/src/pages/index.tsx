@@ -15,8 +15,8 @@ export const getServerSideProps: GetServerSideProps<{
   const page = context.query.page;
   const query = context.query.search;
 
-  const payload: IPayload<string | string[] | undefined> = {
-    page,
+  const payload: IPayload<number | string | string[] | undefined> = {
+    page: page || 1,
     entries_per_page: "15",
     query,
   };
@@ -28,7 +28,7 @@ export const getServerSideProps: GetServerSideProps<{
       continue;
     }
 
-    url_query.set(key, (payload[key] as string).toString());
+    url_query.set(key, (payload[key] || "").toString());
   }
 
   const url = `${

@@ -1,6 +1,5 @@
 import { HttpMethod, HttpStatus } from "@/config/enums";
-import makeDb from "@/server/data-access/make-db";
-import { getPagesPaginated } from "@/server/use-cases/page";
+import { getPagesPaginated } from "@/server/data-access/controllers/page";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -12,7 +11,6 @@ export default async function handler(
       res.status(HttpStatus.UNSUPPORTED_METHOD).json({ success: false });
     }
 
-    await makeDb();
     const query = req.query;
 
     const payload = {
@@ -21,7 +19,9 @@ export default async function handler(
       query: query.query as string,
     };
 
-    await getPagesPaginated({ ...payload });
+    const data = await getPagesPaginated({ ...payload });
+
+    res.status(HttpStatus.OK).json(data.body.data);
   } catch (error) {
     res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(error);
   }

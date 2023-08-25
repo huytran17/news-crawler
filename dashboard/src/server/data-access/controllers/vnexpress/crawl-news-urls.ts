@@ -49,8 +49,10 @@ export default function makeCrawlNewsURLs({
               return done();
             }
 
+            const img_element = $(news_item).find(".thumb-art img");
             const thumbnail_url =
-              $(news_item).find(".thumb-art img").attr("src") || "";
+              img_element.attr("data-src") || img_element.attr("src") || "";
+
             const title = $(news_item).find(".title-news a").text() || "";
             const description =
               $(news_item).find(".description a").html() || "";

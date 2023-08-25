@@ -16,9 +16,9 @@ export default function makeGetPagesPaginated({
   pageDb: IPageDb;
 }): GetPagesPaginated {
   return async function getPagesPaginated({
-    page,
-    entries_per_page,
-    query,
+    page = 1,
+    entries_per_page = 15,
+    query = "",
   }: {
     page: number;
     entries_per_page: number;
