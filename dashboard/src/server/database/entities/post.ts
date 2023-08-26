@@ -1,6 +1,7 @@
 export default class Post implements IPost {
   public readonly _id: string;
   public readonly url: string;
+  public readonly slug: string;
   public readonly title: string;
   public readonly description?: string;
   public readonly content: string;
@@ -9,6 +10,7 @@ export default class Post implements IPost {
   constructor({
     _id,
     url,
+    slug,
     title,
     description,
     content,
@@ -17,6 +19,7 @@ export default class Post implements IPost {
   }: {
     _id: string;
     url: string;
+    slug: string;
     title: string;
     description?: string;
     content: string;
@@ -25,6 +28,7 @@ export default class Post implements IPost {
   }) {
     this._id = _id;
     this.url = url;
+    this.slug = slug;
     this.title = title;
     this.description = description;
     this.content = content;

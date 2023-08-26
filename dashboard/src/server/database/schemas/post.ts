@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 
 const post_schema = new Schema<IPost>({
   url: { type: String, required: true, trim: true },
+  slug: { type: String, required: true, trim: true },
   title: { type: String, required: true, trim: true },
   description: { type: String, default: "", trim: true },
   content: { type: String, required: true, trim: true },

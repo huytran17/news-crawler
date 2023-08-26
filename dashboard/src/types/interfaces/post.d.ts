@@ -4,6 +4,7 @@ declare global {
   interface IPost {
     _id: string;
     url: string;
+    slug: string;
     title: string;
     description?: string;
     content: string;

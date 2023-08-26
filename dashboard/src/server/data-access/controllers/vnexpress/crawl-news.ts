@@ -1,8 +1,8 @@
-import { HttpStatus, SiteType } from "@/config/enums";
+import { Domain, HttpStatus, SiteType } from "@/config/enums";
 import { GetAllBySite } from "@/server/use-cases/page/get-all-by-site";
 import { UpsertPost } from "@/server/use-cases/post/upsert-post";
 import Crawler from "crawler";
-import { map, trim } from "lodash";
+import { map, trim, replace } from "lodash";
 
 export default function makeCrawlNews({
   getAllBySite,
@@ -41,9 +41,11 @@ export default function makeCrawlNews({
           const description = $(page).find(".description").html() || "";
           const content = $(page).find(".fck_detail").html() || "";
           $(content).find(".box-tinlienquanv2").remove();
+          const slug = replace(res.request.uri.href, Domain.VNEXPRESS, "");
 
           const postDetails = {
             url: res.request.uri.href,
+            slug,
             title,
             category: trim(category, "/"),
             description,

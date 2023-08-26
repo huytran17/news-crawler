@@ -3,6 +3,7 @@ import { SiteType } from "@/config/enums";
 export default class Page implements IPage {
   public readonly _id: string;
   public readonly url: string;
+  public readonly slug: string;
   public readonly category: string;
   public readonly title: string;
   public readonly description: string;
@@ -13,6 +14,7 @@ export default class Page implements IPage {
   constructor({
     _id,
     url,
+    slug,
     category,
     title,
     description,
@@ -22,6 +24,7 @@ export default class Page implements IPage {
   }: {
     _id: string;
     url: string;
+    slug: string;
     category: string;
     title: string;
     description: string;
@@ -31,6 +34,7 @@ export default class Page implements IPage {
   }) {
     this._id = _id;
     this.url = url;
+    this.slug = slug;
     this.category = category;
     this.title = title;
     this.description = description;

@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 
 const page_schema = new Schema<IPage>({
   url: { type: String, required: true, trim: true },
+  slug: { type: String, required: true, trim: true },
   category: { type: String, required: true, trim: true },
   title: { type: String, required: true, trim: true },
   description: { type: String, required: true, trim: true },

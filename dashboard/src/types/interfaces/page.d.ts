@@ -4,6 +4,7 @@ declare global {
   interface IPage {
     _id: string;
     url: string;
+    slug: string;
     category: string;
     title: string;
     description: string;

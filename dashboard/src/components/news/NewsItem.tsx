@@ -2,10 +2,12 @@ export default function NewsItem({
   title,
   description,
   thumbnail_url,
+  slug,
 }: {
   title: string;
   description: string;
   thumbnail_url: string;
+  slug: string;
 }) {
   const parsed_description = { __html: description };
 
@@ -16,7 +18,9 @@ export default function NewsItem({
       </div>
       <div className="flex flex-col">
         <div className="text-lg font-bold">
-          <h1>{title}</h1>
+          <h1>
+            <a href={slug}>{title}</a>
+          </h1>
         </div>
         <div
           className="text-base"
