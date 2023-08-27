@@ -1,6 +1,5 @@
 import { map } from "lodash";
 import NewsItem from "./NewsItem";
-import Paginator from "../paging/Paginator";
 
 export default function NewsList({ pages }: { pages: IPage[] }) {
   return (
@@ -10,7 +9,6 @@ export default function NewsList({ pages }: { pages: IPage[] }) {
           <NewsItem {...page} />
         ))}
       </div>
-      <Paginator />
     </>
   );
 }

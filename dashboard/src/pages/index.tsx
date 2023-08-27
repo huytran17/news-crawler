@@ -2,6 +2,7 @@ import NewsList from "@/components/news/NewsList";
 import type { GetServerSideProps } from "next";
 import { api_config } from "@/config/common/api-config";
 import { HttpMethod } from "@/config/enums";
+import Paginator from "../components/paging/Paginator";
 
 interface IPayload<T> extends Record<string, T> {
   page: T;
@@ -42,14 +43,26 @@ export const getServerSideProps: GetServerSideProps<{
   const data: IPagePaginated = await response.json();
 
   const pages: IPage[] = data.data;
+  const pagination = data.pagination;
 
-  return { props: { pages } };
+  const total = pagination.total;
+
+  return { props: { pages, page, total } };
 };
 
-export default function Home({ pages }: { pages: IPage[] }) {
+export default function Home({
+  pages,
+  page,
+  total,
+}: {
+  pages: IPage[];
+  page: number;
+  total: number;
+}) {
   return (
     <main>
       <NewsList pages={pages} />
+      <Paginator current={page} total={total} />
     </main>
   );
 }
