@@ -60,8 +60,7 @@ export default function makeCrawlNews({
               const url = meta_url
                 ?.match(/https?:\/\/\S*/gi)
                 ?.toString()
-                ?.replace('"', "")
-                ?.replace(">", "");
+                ?.replace('">', "");
 
               return `<img src='${url}' alt='${slug}'>`;
             }
