@@ -15,8 +15,11 @@ export default function PostDetail({
       <div className="title font-bold">
         <h1>{title}</h1>
       </div>
-      <div dangerouslySetInnerHTML={parsed_description}></div>
-      <div dangerouslySetInnerHTML={parsed_content}></div>
+      <div
+        className="description"
+        dangerouslySetInnerHTML={parsed_description}
+      ></div>
+      <div className="content" dangerouslySetInnerHTML={parsed_content}></div>
     </div>
   );
 }

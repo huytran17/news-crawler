@@ -47,8 +47,33 @@ table tbody .separator {
   padding-right: 8px;
 }
 
+.article img {
+  width: 100%;
+  padding-bottom: 12px;
+}
+
+.article .description,
+.article .content .Normal {
+  padding-bottom: 12px;
+}
+
+.article .author_mail {
+  text-align: right;
+}
+
+.default-container {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 24px 12px;
+}
+
 @media (max-width: 640px) {
   .thumbnail img {
     width: 100%;
+  }
+
+  .default-container {
+    width: 100%;
+    max-width: unset;
   }
 }
