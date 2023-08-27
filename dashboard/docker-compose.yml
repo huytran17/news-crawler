@@ -6,7 +6,7 @@ services:
     container_name: mongo
     restart: always
     volumes:
-      - ./mongo-data:/mongo-data
+      - ./mongo-data:/mongo/data
     ports:
       - ${MONGO_ROOT_PORT:-27017}:${MONGO_ROOT_PORT}
     environment:
@@ -25,7 +25,7 @@ services:
     container_name: mongo-express
     restart: always
     volumes:
-      - ./mongo-data:/mongo-data
+      - ./mongo-data:/mongo/data
     ports:
       - 8081:8081
     depends_on:
