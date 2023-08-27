@@ -8,9 +8,9 @@ export default function makeGetPostsPaginated({
   findPostsPaginated: GetPostsPaginated;
 }) {
   return async function getPostsPaginated({
-    page,
-    entries_per_page,
-    query,
+    page = 1,
+    entries_per_page = 15,
+    query = "",
   }: {
     page: number;
     entries_per_page: number;

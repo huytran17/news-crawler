@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getPostsPaginated } from "@/server/data-access/controllers/post";
+import { getPostBySlug } from "@/server/data-access/controllers/post";
 import { HttpMethod, HttpStatus } from "@/config/enums";
 
 export default async function handler(
@@ -11,7 +11,11 @@ export default async function handler(
       res.status(HttpStatus.UNSUPPORTED_METHOD).json({ success: false });
     }
 
-    const data = await getPostsPaginated({ ...req.body });
+    const payload = {
+      slug: req.query.slug?.toString() ?? "",
+    };
+
+    const data = await getPostBySlug({ ...payload });
 
     res.status(HttpStatus.OK).json(data.body.data);
   } catch (error) {

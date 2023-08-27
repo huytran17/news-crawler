@@ -39,9 +39,33 @@ export default function makeCrawlNews({
 
           const title = $(page).find(".title-detail").text() || "";
           const description = $(page).find(".description").html() || "";
+          const slug = replace(
+            res.request.uri.href,
+            Domain.VNEXPRESS,
+            ""
+          ).replace(".html", "");
+
           const content = $(page).find(".fck_detail").html() || "";
           $(content).find(".box-tinlienquanv2").remove();
-          const slug = replace(res.request.uri.href, Domain.VNEXPRESS, "");
+
+          const final_content = replace(
+            content,
+            /<figure\s(.*?)>(.*?)<\/figure>/gs,
+            (matched) => {
+              const meta_url =
+                matched
+                  .match(/<img itemprop="contentUrl"\s(.*?)>/gs)
+                  ?.toString() || "";
+
+              const url = meta_url
+                ?.match(/https?:\/\/\S*/gi)
+                ?.toString()
+                ?.replace('"', "")
+                ?.replace(">", "");
+
+              return `<img src='${url}' alt='${slug}'>`;
+            }
+          );
 
           const postDetails = {
             url: res.request.uri.href,
@@ -49,7 +73,7 @@ export default function makeCrawlNews({
             title,
             category: trim(category, "/"),
             description,
-            content,
+            content: final_content,
           };
 
           await upsertPost({ postDetails });

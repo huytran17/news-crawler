@@ -1,5 +1,5 @@
 import NewsList from "@/components/news/NewsList";
-import { GetServerSideProps } from "next";
+import type { GetServerSideProps } from "next";
 import { api_config } from "@/config/common/api-config";
 import { HttpMethod } from "@/config/enums";
 
@@ -12,8 +12,7 @@ interface IPayload<T> extends Record<string, T> {
 export const getServerSideProps: GetServerSideProps<{
   pages: IPage[];
 }> = async (context) => {
-  const page = context.query.page;
-  const query = context.query.search;
+  const { page, query } = context.query;
 
   const payload: IPayload<number | string | string[] | undefined> = {
     page: page || 1,
@@ -42,7 +41,7 @@ export const getServerSideProps: GetServerSideProps<{
 
   const data: IPagePaginated = await response.json();
 
-  const pages = data.data;
+  const pages: IPage[] = data.data;
 
   return { props: { pages } };
 };

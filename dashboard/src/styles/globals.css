@@ -36,6 +36,17 @@ table tbody .separator {
   max-width: unset;
 }
 
+.article .title h1 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.article .location-stamp {
+  color: rgb(128, 128, 128);
+  text-transform: uppercase;
+  padding-right: 8px;
+}
+
 @media (max-width: 640px) {
   .thumbnail img {
     width: 100%;

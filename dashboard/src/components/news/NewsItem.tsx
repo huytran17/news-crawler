@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function NewsItem({
   title,
   description,
@@ -19,7 +21,7 @@ export default function NewsItem({
       <div className="flex flex-col">
         <div className="text-lg font-bold">
           <h1>
-            <a href={slug}>{title}</a>
+            <Link href={slug}>{title}</Link>
           </h1>
         </div>
         <div

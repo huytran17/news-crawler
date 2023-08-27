@@ -14,4 +14,6 @@ export default interface IPostDb {
   }: {
     postDetails: Omit<IPost, "_id" | "created_at">;
   }) => Promise<IPost | null>;
+
+  findBySlug: ({ slug }: { slug: string }) => Promise<IPost | null>;
 }

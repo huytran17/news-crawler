@@ -56,7 +56,10 @@ export default function makeCrawlNewsURLs({
             const title = $(news_item).find(".title-news a").text() || "";
             const description =
               $(news_item).find(".description a").html() || "";
-            const slug = replace(url, Domain.VNEXPRESS, "");
+            const slug = replace(url, Domain.VNEXPRESS, "").replace(
+              ".html",
+              ""
+            );
 
             const pageDetails = {
               url,

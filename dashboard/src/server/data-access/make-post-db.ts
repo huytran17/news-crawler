@@ -1,4 +1,4 @@
-import { merge } from "lodash";
+import { map, merge } from "lodash";
 import mongoose from "mongoose";
 
 import Post from "../database/entities/post";
@@ -50,7 +50,7 @@ export default function makePostDb({
         const is_over = totalTaking > total;
         const to = has_more ? (is_over ? total : totalTaking) : null;
 
-        const data = existing.map((post) => new Post(post));
+        const data = map(existing, (post) => new Post(post));
 
         return {
           pagination: {
@@ -88,6 +88,22 @@ export default function makePostDb({
 
       if (inserted) {
         return new Post(inserted);
+      }
+
+      return null;
+    }
+
+    async findBySlug({ slug }: { slug: string }): Promise<IPost | null> {
+      const query_conditions = {
+        slug,
+      };
+
+      const existing = await postDbModel
+        .findOne(query_conditions)
+        .lean({ virtual: true });
+
+      if (existing) {
+        return new Post(existing);
       }
 
       return null;
