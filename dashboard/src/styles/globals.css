@@ -67,6 +67,62 @@ table tbody .separator {
   padding: 24px 12px;
 }
 
+.paginator {
+  margin-top: 66px;
+}
+
+.paginator .paginator-list {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.paginator .paginator-item {
+  width: 42px;
+  height: 42px;
+  border-radius: 4px;
+  background-color: #f2f2fc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color .25s linear, border-color .25s linear;
+  moz-transition: background-color .25s linear, border-color .25s linear;
+}
+
+.paginator .paginator-item a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.paginator .paginator-item.active {
+  background-color: #e5e5ff;
+  border-color: #efeff7;
+}
+
+.paginator .paginator-item:hover {
+  background-color: #ffffff;
+  border: 1px solid #f2f2fc;
+}
+
+.paginator .paginator-item.prev,
+.paginator .paginator-item.next {
+  background-color: #ffffff;
+  border: 1px solid #f2f2fc;
+}
+
+.paginator .paginator-item.prev svg,
+.paginator .paginator-item.next svg {
+  margin: 0 auto;
+}
+
+.paginator .paginator-item.prev:hover,
+.paginator .paginator-item.next:hover {
+  background-color: #f2f2fc;
+  border: 1px solid #ffffff;
+}
+
 @media (max-width: 640px) {
   .thumbnail img {
     width: 100%;

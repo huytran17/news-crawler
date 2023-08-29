@@ -13,10 +13,10 @@ interface IPayload<T> extends Record<string, T> {
 export const getServerSideProps: GetServerSideProps<{
   pages: IPage[];
 }> = async (context) => {
-  const { page, query } = context.query;
+  const { page = 1, query } = context.query;
 
   const payload: IPayload<number | string | string[] | undefined> = {
-    page: page || 1,
+    page,
     entries_per_page: "15",
     query,
   };
@@ -46,23 +46,28 @@ export const getServerSideProps: GetServerSideProps<{
   const pagination = data.pagination;
 
   const total = pagination.total;
+  const entries_per_page = pagination.entries_per_page;
 
-  return { props: { pages, page, total } };
+  return { props: { pages, page: Number(page), entries_per_page, total } };
 };
 
 export default function Home({
   pages,
   page,
   total,
+  entries_per_page,
 }: {
   pages: IPage[];
   page: number;
   total: number;
+  entries_per_page: number;
 }) {
+  const total_pages = Math.ceil(total / entries_per_page);
+
   return (
     <main>
       <NewsList pages={pages} />
-      <Paginator current={page} total={total} />
+      <Paginator current={page} total={total_pages} />
     </main>
   );
 }

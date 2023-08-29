@@ -16,30 +16,78 @@ export default function Paginator({
 
   let start_redundant = 0;
 
-  const start_center = Math.ceil(Paging.LIMIT_SHOWING / 2);
-  const end_center = Math.floor(Paging.LIMIT_SHOWING / 2);
+  const start_half = Math.ceil(Paging.LIMIT_SHOWING / 2);
+  const end_half = Math.floor(Paging.LIMIT_SHOWING / 2);
 
-  let start_slice = current - start_center;
+  let start_slice = current - start_half;
+
   if (start_slice < 0) {
     start_redundant = Math.abs(start_slice);
     start_slice = 0;
   }
 
-  let end_slice = current + end_center + start_redundant;
+  let end_slice = current + end_half + start_redundant;
+  if (current > total) {
+    end_slice = total + end_half;
+  }
+
   if (end_slice > total_indicator) {
-    const end_redundant = total_indicator - end_slice;
+    const end_redundant = Math.abs(total_indicator - end_slice);
     start_slice += end_redundant;
     end_slice = total_indicator;
   }
 
   const indicators = available_indicators.slice(start_slice, end_slice);
 
-  return !total ? null : (
+  if (!total) {
+    return null;
+  }
+
+  return (
     <div className="paginator">
-      <ul>
+      <ul className="paginator-list">
+        <li className="paginator-item prev">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 19.5L8.25 12l7.5-7.5"
+            />
+          </svg>
+        </li>
+
         {indicators.map((indicator, index) => (
-          <li key={`indicator-${index}`}>{indicator}</li>
+          <li
+            className={`paginator-item ${current === indicator && "active"}`}
+            key={`indicator-${index}`}
+          >
+            <a href={`?page=${indicator}`}>{indicator}</a>
+          </li>
         ))}
+
+        <li className="paginator-item next">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M8.25 4.5l7.5 7.5-7.5 7.5"
+            />
+          </svg>
+        </li>
       </ul>
     </div>
   );
