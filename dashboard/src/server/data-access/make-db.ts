@@ -11,13 +11,8 @@ export default async function makeDb() {
 }
 
 function makeConnectionString() {
-  const {
-    MONGO_ROOT_USERNAME,
-    MONGO_ROOT_PASSWORD,
-    MONGO_ROOT_HOST,
-    MONGO_ROOT_PORT,
-    MONGO_ROOT_DATABASE,
-  } = process.env;
+  const { MONGO_ROOT_USERNAME, MONGO_ROOT_PASSWORD, MONGO_ROOT_DATABASE } =
+    process.env;
 
-  return `mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@${MONGO_ROOT_HOST}:${MONGO_ROOT_PORT}/${MONGO_ROOT_DATABASE}?authSource=admin`;
+  return `mongodb+srv://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@${MONGO_ROOT_DATABASE}.53encrg.mongodb.net/?retryWrites=true&w=majority`;
 }
