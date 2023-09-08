@@ -7,34 +7,29 @@ export default function Paginator({
   total: number;
   current: number;
 }) {
+  let current_page = current;
+  current > total && (current_page = total);
+  current < 1 && (current_page = 1);
+
   const available_indicators: number[] = Array.from(
     Array(total).keys(),
     (_, index) => index + 1
   );
 
-  const total_indicator = available_indicators.length;
-
-  let start_redundant = 0;
-
   const start_half = Math.ceil(Paging.LIMIT_SHOWING / 2);
   const end_half = Math.floor(Paging.LIMIT_SHOWING / 2);
 
-  let start_slice = current - start_half;
+  let start_slice = current_page - start_half;
+  let end_slice = current_page + end_half;
 
   if (start_slice < 0) {
-    start_redundant = Math.abs(start_slice);
     start_slice = 0;
+    end_slice = Paging.LIMIT_SHOWING;
   }
 
-  let end_slice = current + end_half + start_redundant;
-  if (current > total) {
-    end_slice = total + end_half;
-  }
-
-  if (end_slice > total_indicator) {
-    const end_redundant = Math.abs(total_indicator - end_slice);
-    start_slice += end_redundant;
-    end_slice = total_indicator;
+  if (end_slice > total) {
+    start_slice = total - Paging.LIMIT_SHOWING;
+    end_slice = total;
   }
 
   const indicators = available_indicators.slice(start_slice, end_slice);
@@ -65,7 +60,9 @@ export default function Paginator({
 
         {indicators.map((indicator, index) => (
           <li
-            className={`paginator-item ${current === indicator && "active"}`}
+            className={`paginator-item ${
+              current_page === indicator ? "active" : ""
+            }`}
             key={`indicator-${index}`}
           >
             <a href={`?page=${indicator}`}>{indicator}</a>

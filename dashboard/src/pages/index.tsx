@@ -66,8 +66,12 @@ export default function Home({
 
   return (
     <main>
-      <NewsList pages={pages} />
-      <Paginator current={page} total={total_pages} />
+      {pages.length ? (
+        <>
+          <NewsList pages={pages} />
+          <Paginator current={page} total={total_pages} />
+        </>
+      ) : null}
     </main>
   );
 }
