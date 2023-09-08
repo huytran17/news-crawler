@@ -1,6 +1,6 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { getPostsPaginated } from "@/server/data-access/controllers/post";
 import { HttpMethod, HttpStatus } from "@/config/enums";
+import { getPostsPaginated } from "@/server/data-access/controllers/post";
+import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
